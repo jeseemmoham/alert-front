@@ -14,13 +14,16 @@ export const connectSocket = () => {
 
   try {
     socket = io(SOCKET_URL, {
-      transports: ['websocket', 'polling'],
-      autoConnect: true,
+      transports: ['polling', 'websocket'],
+      autoConnect: true, 
+      withCredentials: true,
       reconnection: true,
       reconnectionAttempts: IS_PRODUCTION ? 3 : 5,
       reconnectionDelay: 2000,
       reconnectionDelayMax: 5000,
-      timeout: 10000,
+      timeout: 20000,
+      reconnectionDelay: 1000,
+      reconnectionDelayMax: 5000,
     });
 
     socket.on('connect', () => {
